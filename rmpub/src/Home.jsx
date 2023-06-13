@@ -1,11 +1,23 @@
 import React, { useEffect } from 'react'
 import bootstrap from '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js';
-import Splide from '@splidejs/splide';
 
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 const Home = () => {
+    const images = ["d1.jpg", "d2.jpg", "d3.jpg", "d4.jpg", "d5.jpg", "d6.jpg", "d7.jpg"];
+    const titles = [
+        "Progressive web app ready",
+        "Reusable components",
+        "Great for phones & tablets",
+        "Change the styles in sass",
+        "Sketch source file included",
+        "RTL (Right to Left) Support",
+        "Written with a code structure"
+    ];
     useEffect(() => {
-   
+
 
         const Mobilekit = {
             version: "2.9", // Mobilekit version
@@ -645,7 +657,7 @@ const Home = () => {
         //-----------------------------------------------------------------------
 
 
-        
+
         //-----------------------------------------------------------------------
 
 
@@ -1018,6 +1030,39 @@ const Home = () => {
             themeTesting();
         }
         //-----------------------------------------------------------------------
+        var pageBody = document.body;
+
+        // Other parts of your code...
+
+        // if dark mode on
+        if (checkDarkModeStatus === "1" || pageBody.classList.contains('dark-mode-active')) {
+            switchDarkModeCheck(true);
+            if (pageBodyActive) {
+                // dark mode already activated
+            }
+            else {
+                pageBody.classList.add("dark-mode-active")
+            }
+        }
+        else {
+            switchDarkModeCheck(false);
+        }
+        switchDarkMode.forEach(function (el) {
+            el.addEventListener("change", function () {
+                var darkmodeCheck = localStorage.getItem("MobilekitDarkMode");
+                var bodyCheck = pageBody.classList.contains('dark-mode-active');
+                if (darkmodeCheck === "1" || bodyCheck) {
+                    pageBody.classList.remove("dark-mode-active");
+                    localStorage.setItem("MobilekitDarkMode", "0");
+                    switchDarkModeCheck(false);
+                }
+                else {
+                    pageBody.classList.add("dark-mode-active")
+                    switchDarkModeCheck(true);
+                    localStorage.setItem("MobilekitDarkMode", "1");
+                }
+            })
+        })
     }, []);
 
     return (
@@ -1025,6 +1070,7 @@ const Home = () => {
             <div id="loader">
                 <div class="spinner-border text-primary" role="status"></div>
             </div>
+
             <div id="notification-welcome" class="notification-box">
                 <div class="notification-dialog android-style">
                     <div class="notification-header">
@@ -1033,7 +1079,7 @@ const Home = () => {
                             <strong>Mobilekit</strong>
                             <span>just now</span>
                         </div>
-                        <a href="#" class="close-button">
+                        <a href="/" class="close-button">
                             <ion-icon name="close"></ion-icon>
                         </a>
                     </div>
@@ -1048,9 +1094,10 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
             <div class="appHeader bg-primary scrolled">
                 <div class="left">
-                    <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+                    <a href="/" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
                         <ion-icon name="menu-outline"></ion-icon>
                     </a>
                 </div>
@@ -1058,7 +1105,7 @@ const Home = () => {
                     Discover
                 </div>
                 <div class="right">
-                    <a href="#" class="headerButton toggle-searchbox">
+                    <a href="/" class="headerButton toggle-searchbox">
                         <ion-icon name="search-outline"></ion-icon>
                     </a>
                 </div>
@@ -1071,7 +1118,7 @@ const Home = () => {
                         <i class="input-icon">
                             <ion-icon name="search-outline"></ion-icon>
                         </i>
-                        <a href="#" class="ms-1 close toggle-searchbox">
+                        <a href="/" class="ms-1 close toggle-searchbox">
                             <ion-icon name="close-circle"></ion-icon>
                         </a>
                     </div>
@@ -1089,65 +1136,28 @@ const Home = () => {
 
 
                     <div class="carousel-multiple splide">
-                        <div class="splide__track">
-                            <ul class="splide__list">
-                                <li class="splide__slide">
-                                    <div class="card">
-                                        <img src="assets/img/sample/photo/d1.jpg" class="card-img-top" alt="image" />
-                                        <div class="card-body pt-2">
-                                            <h4 class="mb-0">Progressive web app ready</h4>
+
+
+                        <div className="section full mt-3 mb-3">
+                            <div className="section full mt-3 mb-3">
+
+
+
+                                {/* Slider Carousel */}
+                                <Splide options={{ perPage: 4, rewind: true, type: "loop", gap: 16, padding: 16, arrows: false, pagination: true }}>
+                                    <SplideSlide>
+                                        <div className="card">
+                                            <img src="assets/img/sample/photo/wide4.jpg" width={40} height={40} className="card-img-top" alt="carousel" />
+                                            <div className="card-body pt-2">
+                                                <h4 className="mb-0">Your Title</h4>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li class="splide__slide">
-                                    <div class="card">
-                                        <img src="assets/img/sample/photo/d2.jpg" class="card-img-top" alt="image" />
-                                        <div class="card-body pt-2">
-                                            <h4 class="mb-0">Reusable components</h4>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="splide__slide">
-                                    <div class="card">
-                                        <img src="assets/img/sample/photo/d3.jpg" class="card-img-top" alt="image" />
-                                        <div class="card-body pt-2">
-                                            <h4 class="mb-0">Great for phones & tablets</h4>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="splide__slide">
-                                    <div class="card">
-                                        <img src="assets/img/sample/photo/d4.jpg" class="card-img-top" alt="image" />
-                                        <div class="card-body pt-2">
-                                            <h4 class="mb-0">Change the styles in sass</h4>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="splide__slide">
-                                    <div class="card">
-                                        <img src="assets/img/sample/photo/d6.jpg" class="card-img-top" alt="image" />
-                                        <div class="card-body pt-2">
-                                            <h4 class="mb-0">Sketch source file included</h4>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="splide__slide">
-                                    <div class="card">
-                                        <img src="assets/img/sample/photo/d7.jpg" class="card-img-top" alt="image" />
-                                        <div class="card-body pt-2">
-                                            <h4 class="mb-0">RTL (Right to Left) Support</h4>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="splide__slide">
-                                    <div class="card">
-                                        <img src="assets/img/sample/photo/d5.jpg" class="card-img-top" alt="image" />
-                                        <div class="card-body pt-2">
-                                            <h4 class="mb-0">Written with a code structure</h4>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </SplideSlide>
+
+                                </Splide>
+
+
+                            </div>
                         </div>
                     </div>
 
@@ -1182,7 +1192,7 @@ const Home = () => {
                             <p class="card-text">
                                 Reusable components designed for the mobile interface and ready to use.
                             </p>
-                            <a href="app-components.html" class="btn btn-primary">
+                            <a href="/" class="btn btn-primary">
                                 <ion-icon name="cube-outline"></ion-icon>
                                 Preview
                             </a>
@@ -1199,7 +1209,7 @@ const Home = () => {
                             <p class="card-text">
                                 Mobilekit comes with basic pages you may need and use in your projects easily.
                             </p>
-                            <a href="app-pages.html" class="btn btn-primary">
+                            <a href="/" class="btn btn-primary">
                                 <ion-icon name="layers-outline"></ion-icon>
                                 Preview
                             </a>
@@ -1218,22 +1228,22 @@ const Home = () => {
                     Great way to start your mobile websites and pwa projects.
 
                     <div class="mt-2">
-                        <a href="#" class="btn btn-icon btn-sm btn-facebook">
+                        <a href="/" class="btn btn-icon btn-sm btn-facebook">
                             <ion-icon name="logo-facebook"></ion-icon>
                         </a>
-                        <a href="#" class="btn btn-icon btn-sm btn-twitter">
+                        <a href="/" class="btn btn-icon btn-sm btn-twitter">
                             <ion-icon name="logo-twitter"></ion-icon>
                         </a>
-                        <a href="#" class="btn btn-icon btn-sm btn-linkedin">
+                        <a href="/" class="btn btn-icon btn-sm btn-linkedin">
                             <ion-icon name="logo-linkedin"></ion-icon>
                         </a>
-                        <a href="#" class="btn btn-icon btn-sm btn-instagram">
+                        <a href="/" class="btn btn-icon btn-sm btn-instagram">
                             <ion-icon name="logo-instagram"></ion-icon>
                         </a>
-                        <a href="#" class="btn btn-icon btn-sm btn-whatsapp">
+                        <a href="/" class="btn btn-icon btn-sm btn-whatsapp">
                             <ion-icon name="logo-whatsapp"></ion-icon>
                         </a>
-                        <a href="#" class="btn btn-icon btn-sm btn-secondary goTop">
+                        <a href="/" class="btn btn-icon btn-sm btn-secondary goTop">
                             <ion-icon name="arrow-up-outline"></ion-icon>
                         </a>
                     </div>
@@ -1241,23 +1251,23 @@ const Home = () => {
                 </div>
 
                 <div class="appBottomMenu">
-                    <a href="index.html" class="item active">
+                    <a href="/" class="item active">
                         <div class="col">
                             <ion-icon name="home-outline"></ion-icon>
                         </div>
                     </a>
-                    <a href="app-components.html" class="item">
+                    <a href="/" class="item">
                         <div class="col">
                             <ion-icon name="cube-outline"></ion-icon>
                         </div>
                     </a>
-                    <a href="page-chat.html" class="item">
+                    <a href="/" class="item">
                         <div class="col">
                             <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
                             <span class="badge badge-danger">5</span>
                         </div>
                     </a>
-                    <a href="app-pages.html" class="item">
+                    <a href="/" class="item">
                         <div class="col">
                             <ion-icon name="layers-outline"></ion-icon>
                         </div>
@@ -1283,7 +1293,7 @@ const Home = () => {
                                     California
                                 </div>
                             </div>
-                            <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
+                            <a href="/" class="close-sidebar-button" data-bs-dismiss="offcanvas">
                                 <ion-icon name="close"></ion-icon>
                             </a>
                         </div>
@@ -1291,7 +1301,7 @@ const Home = () => {
 
                         <ul class="listview flush transparent no-line image-listview mt-2">
                             <li>
-                                <a href="index.html" class="item">
+                                <a href="/" class="item">
                                     <div class="icon-box bg-primary">
                                         <ion-icon name="home-outline"></ion-icon>
                                     </div>
@@ -1301,7 +1311,7 @@ const Home = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="app-components.html" class="item">
+                                <a href="/" class="item">
                                     <div class="icon-box bg-primary">
                                         <ion-icon name="cube-outline"></ion-icon>
                                     </div>
@@ -1311,7 +1321,7 @@ const Home = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="app-pages.html" class="item">
+                                <a href="/" class="item">
                                     <div class="icon-box bg-primary">
                                         <ion-icon name="layers-outline"></ion-icon>
                                     </div>
@@ -1321,7 +1331,7 @@ const Home = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="page-chat.html" class="item">
+                                <a href="/" class="item">
                                     <div class="icon-box bg-primary">
                                         <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
                                     </div>
@@ -1352,7 +1362,7 @@ const Home = () => {
                         </div>
                         <ul class="listview image-listview flush transparent no-line">
                             <li>
-                                <a href="page-chat.html" class="item">
+                                <a href="/" class="item">
                                     <img src="assets/img/sample/avatar/avatar7.jpg" alt="image" class="image" />
                                     <div class="in">
                                         <div>Sophie Asveld</div>
@@ -1360,7 +1370,7 @@ const Home = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="page-chat.html" class="item">
+                                <a href="/" class="item">
                                     <img src="assets/img/sample/avatar/avatar3.jpg" alt="image" class="image" />
                                     <div class="in">
                                         <div>Sebastian Bennett</div>
@@ -1369,7 +1379,7 @@ const Home = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="page-chat.html" class="item">
+                                <a href="/" class="item">
                                     <img src="assets/img/sample/avatar/avatar10.jpg" alt="image" class="image" />
                                     <div class="in">
                                         <div>Beth Murphy</div>
@@ -1377,7 +1387,7 @@ const Home = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="page-chat.html" class="item">
+                                <a href="/" class="item">
                                     <img src="assets/img/sample/avatar/avatar2.jpg" alt="image" class="image" />
                                     <div class="in">
                                         <div>Amelia Cabal</div>
@@ -1385,7 +1395,7 @@ const Home = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="page-chat.html" class="item">
+                                <a href="/" class="item">
                                     <img src="assets/img/sample/avatar/avatar5.jpg" alt="image" class="image" />
                                     <div class="in">
                                         <div>Henry Doe</div>
@@ -1396,16 +1406,16 @@ const Home = () => {
                     </div>
 
                     <div class="sidebar-buttons">
-                        <a href="#" class="button">
+                        <a href="/" class="button">
                             <ion-icon name="person-outline"></ion-icon>
                         </a>
-                        <a href="#" class="button">
+                        <a href="/" class="button">
                             <ion-icon name="archive-outline"></ion-icon>
                         </a>
-                        <a href="#" class="button">
+                        <a href="/" class="button">
                             <ion-icon name="settings-outline"></ion-icon>
                         </a>
-                        <a href="#" class="button">
+                        <a href="/" class="button">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </a>
                     </div>
