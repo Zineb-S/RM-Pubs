@@ -104,23 +104,7 @@ const Home = () => {
                 el.setAttribute('data-splide', '{"direction":"rtl"}')
             })
         }
-        //-----------------------------------------------------------------------
 
-        //-----------------------------------------------------------------------
-        // Fix for # href
-        //-----------------------------------------------------------------------
-        var aWithHref = document.querySelectorAll('a[href*="#"]');
-        aWithHref.forEach(function (el) {
-            el.addEventListener("click", function (e) {
-                e.preventDefault();
-            })
-        });
-        //-----------------------------------------------------------------------
-
-
-        //-----------------------------------------------------------------------
-        // Go Top Button
-        //-----------------------------------------------------------------------
         var goTopButton = document.querySelectorAll(".goTop");
         goTopButton.forEach(function (el) {
             // show fixed button after some scrolling
@@ -350,115 +334,6 @@ const Home = () => {
         })
         //-----------------------------------------------------------------------
 
-
-        //-----------------------------------------------------------------------
-        // Carousel
-        // Splide Carousel
-        document.addEventListener('DOMContentLoaded', function () {
-
-            // Full Carousel
-            document.querySelectorAll('.carousel-full').forEach(carousel => new Splide(carousel, {
-                perPage: 1,
-                rewind: true,
-                type: "loop",
-                gap: 0,
-                arrows: false,
-                pagination: false,
-            }).mount());
-
-            // Single Carousel
-            document.querySelectorAll('.carousel-single').forEach(carousel => new Splide(carousel, {
-                perPage: 3,
-                rewind: true,
-                type: "loop",
-                gap: 16,
-                padding: 16,
-                arrows: false,
-                pagination: false,
-                breakpoints: {
-                    768: {
-                        perPage: 1
-                    },
-                    991: {
-                        perPage: 2
-                    }
-                }
-            }).mount());
-
-            // Multiple Carousel
-            document.querySelectorAll('.carousel-multiple').forEach(carousel => new Splide(carousel, {
-                perPage: 4,
-                rewind: true,
-                type: "loop",
-                gap: 16,
-                padding: 16,
-                arrows: false,
-                pagination: false,
-                breakpoints: {
-                    768: {
-                        perPage: 2
-                    },
-                    991: {
-                        perPage: 3
-                    }
-                }
-            }).mount());
-
-            // Small Carousel
-            document.querySelectorAll('.carousel-small').forEach(carousel => new Splide(carousel, {
-                perPage: 9,
-                rewind: false,
-                type: "loop",
-                gap: 16,
-                padding: 16,
-                arrows: false,
-                pagination: false,
-                breakpoints: {
-                    768: {
-                        perPage: 5
-                    },
-                    991: {
-                        perPage: 7
-                    }
-                }
-            }).mount());
-
-            // Slider Carousel
-            document.querySelectorAll('.carousel-slider').forEach(carousel => new Splide(carousel, {
-                perPage: 1,
-                rewind: false,
-                type: "loop",
-                gap: 16,
-                padding: 16,
-                arrows: false,
-                pagination: true
-            }).mount());
-
-            // Stories Carousel
-            document.querySelectorAll('.story-block').forEach(carousel => new Splide(carousel, {
-                perPage: 16,
-                rewind: false,
-                type: "slide",
-                gap: 16,
-                padding: 16,
-                arrows: false,
-                pagination: false,
-                breakpoints: {
-                    500: {
-                        perPage: 4
-                    },
-                    768: {
-                        perPage: 7
-                    },
-                    1200: {
-                        perPage: 11
-                    }
-                }
-            }).mount());
-        });
-        //-----------------------------------------------------------------------
-
-
         //-----------------------------------------------------------------------
         // Notification
         // trigger notification
@@ -564,323 +439,6 @@ const Home = () => {
             window.addEventListener("scroll", function () {
                 animatedScroll();
             })
-        }
-        //-----------------------------------------------------------------------
-
-
-        //-----------------------------------------------------------------------
-        // Offline Mode / Online Mode Detection
-
-        // You can change the text here
-        var OnlineText = "Connected to Internet";
-        var OfflineText = "No Internet Connection";
-
-        // Online Mode Toast Append
-        function onlineModeToast() {
-            var check = document.getElementById("online-toast");
-            if (document.body.contains(check)) {
-                check.classList.add("show")
-            }
-            else {
-                pageBody.appendChild(document.createElement("div")).id = "online-toast";
-                var toast = document.getElementById("online-toast");
-                toast.className = "toast-box bg-success toast-top tap-to-close";
-                toast.innerHTML =
-                    "<div class='in'><div class='text'>"
-                    +
-                    OnlineText
-                    +
-                    "</div></div>"
-                setTimeout(() => {
-                    toastbox('online-toast', 3000);
-                }, 500);
-            }
-        }
-
-        // Offline Mode Toast Append
-        function offlineModeToast() {
-            var check = document.getElementById("offline-toast");
-            if (document.body.contains(check)) {
-                check.classList.add("show")
-            }
-            else {
-                pageBody.appendChild(document.createElement("div")).id = "offline-toast";
-                var toast = document.getElementById("offline-toast");
-                toast.className = "toast-box bg-danger toast-top tap-to-close";
-                toast.innerHTML =
-                    "<div class='in'><div class='text'>"
-                    +
-                    OfflineText
-                    +
-                    "</div></div>"
-                setTimeout(() => {
-                    toastbox('offline-toast', 3000);
-                }, 500);
-            }
-        }
-
-        // Online Mode Function
-        function onlineMode() {
-            var check = document.getElementById("offline-toast");
-            if (document.body.contains(check)) {
-                check.classList.remove("show")
-            }
-            onlineModeToast();
-            var toast = document.getElementById("online-toast")
-            toast.addEventListener("click", function () {
-                this.classList.remove("show")
-            })
-            setTimeout(() => {
-                toast.classList.remove("show")
-            }, 3000);
-        }
-
-        // Online Mode Function
-        function offlineMode() {
-            var check = document.getElementById("online-toast");
-            if (document.body.contains(check)) {
-                check.classList.remove("show")
-            }
-            offlineModeToast();
-            var toast = document.getElementById("offline-toast")
-            toast.addEventListener("click", function () {
-                this.classList.remove("show")
-            })
-            setTimeout(() => {
-                toast.classList.remove("show")
-            }, 3000);
-        }
-
-        // Check with event listener if online or offline
-        window.addEventListener('online', onlineMode);
-        window.addEventListener('offline', offlineMode);
-        //-----------------------------------------------------------------------
-
-
-
-        //-----------------------------------------------------------------------
-
-
-        //-----------------------------------------------------------------------
-        // Multi-level Listview
-        var multiListview = document.querySelectorAll(".listview .multi-level > a.item");
-
-        multiListview.forEach(function (el) {
-            el.addEventListener("click", function () {
-                var parent = this.parentNode;
-                var listview = parent.parentNode;
-                var container = parent.querySelectorAll('.listview')
-                var activated = listview.querySelectorAll('.multi-level.active');
-                var activatedContainer = listview.querySelectorAll('.multi-level.active .listview')
-
-                function openContainer() {
-                    container.forEach(function (e) {
-                        e.style.height = 'auto';
-                        var currentheight = e.clientHeight + 10 + 'px';
-                        e.style.height = '0px'
-                        setTimeout(() => {
-                            e.style.height = currentheight
-                        }, 0);
-                    })
-                }
-                function closeContainer() {
-                    container.forEach(function (e) {
-                        e.style.height = '0px';
-                    })
-                }
-                if (parent.classList.contains('active')) {
-                    parent.classList.remove('active');
-                    closeContainer();
-                }
-                else {
-                    parent.classList.add('active');
-                    openContainer();
-                }
-                activated.forEach(function (element) {
-                    element.classList.remove('active');
-                    activatedContainer.forEach(function (e) {
-                        e.style.height = '0px'
-                    })
-                })
-            });
-
-        })
-        //-----------------------------------------------------------------------
-
-
-
-        //-----------------------------------------------------------------------
-        // Add to Home
-        function iosAddtoHome() {
-            var offcanvas = new bootstrap.Offcanvas(document.getElementById('ios-add-to-home-screen'))
-            offcanvas.toggle();
-        }
-        function androidAddtoHome() {
-            var offcanvas = new bootstrap.Offcanvas(document.getElementById('android-add-to-home-screen'))
-            offcanvas.toggle();
-        }
-        function AddtoHome(time, once) {
-            if (once) {
-                var AddHomeStatus = localStorage.getItem("MobilekitAddHomeStatus");
-                if (AddHomeStatus === "1" || AddHomeStatus === 1) {
-                    // already showed up
-                }
-                else {
-                    localStorage.setItem("MobilekitAddHomeStatus", 1)
-                    window.addEventListener('load', () => {
-                        if (navigator.standalone) {
-                            // if app installed ios home screen
-                        }
-                        else if (matchMedia('(display-mode: standalone)').matches) {
-                            // if app installed android home screen
-                        }
-                        else {
-                            // if app is not installed
-                            if (androidDetection) {
-                                setTimeout(() => {
-                                    androidAddtoHome()
-                                }, time);
-                            }
-                            if (iosDetection) {
-                                setTimeout(() => {
-                                    iosAddtoHome()
-                                }, time);
-                            }
-                        }
-                    });
-                }
-            }
-            else {
-                window.addEventListener('load', () => {
-                    if (navigator.standalone) {
-                        // app loaded to ios
-                    }
-                    else if (matchMedia('(display-mode: standalone)').matches) {
-                        // app loaded to android
-                    }
-                    else {
-                        // app not loaded
-                        if (androidDetection) {
-                            setTimeout(() => {
-                                androidAddtoHome()
-                            }, time);
-                        }
-                        if (iosDetection) {
-                            setTimeout(() => {
-                                iosAddtoHome()
-                            }, time);
-                        }
-                    }
-                });
-            }
-
-        }
-        //-----------------------------------------------------------------------
-
-
-        //-----------------------------------------------------------------------
-        // Dark Mode Detection
-        var checkDarkModeStatus = localStorage.getItem("MobilekitDarkMode");
-        var switchDarkMode = document.querySelectorAll(".dark-mode-switch");
-        var pageBodyActive = pageBody.classList.contains("dark-mode-active");
-
-        // Check if enable as default
-        if (Mobilekit.Dark_Mode.default) {
-            pageBody.classList.add("dark-mode-active");
-        }
-
-        // Night Mode
-        if (Mobilekit.Dark_Mode.night_mode.enable) {
-            var nightStart = Mobilekit.Dark_Mode.night_mode.start_time;
-            var nightEnd = Mobilekit.Dark_Mode.night_mode.end_time;
-            var currentDate = new Date();
-            var currentHour = currentDate.getHours();
-            if (currentHour >= nightStart || currentHour < nightEnd) {
-                // It is night time
-                pageBody.classList.add("dark-mode-active");
-            }
-        }
-
-        // Auto Detect Dark Mode
-        if (Mobilekit.Dark_Mode.auto_detect.enable)
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                pageBody.classList.add("dark-mode-active");
-            }
-
-        function switchDarkModeCheck(value) {
-            switchDarkMode.forEach(function (el) {
-                el.checked = value
-            })
-        }
-        // if dark mode on
-        if (checkDarkModeStatus === 1 || checkDarkModeStatus === "1" || pageBody.classList.contains('dark-mode-active')) {
-            switchDarkModeCheck(true);
-            if (pageBodyActive) {
-                // dark mode already activated
-            }
-            else {
-                pageBody.classList.add("dark-mode-active")
-            }
-        }
-        else {
-            switchDarkModeCheck(false);
-        }
-        switchDarkMode.forEach(function (el) {
-            el.addEventListener("click", function () {
-                var darkmodeCheck = localStorage.getItem("MobilekitDarkMode");
-                var bodyCheck = pageBody.classList.contains('dark-mode-active');
-                if (darkmodeCheck === 1 || darkmodeCheck === "1" || bodyCheck) {
-                    pageBody.classList.remove("dark-mode-active");
-                    localStorage.setItem("MobilekitDarkMode", "0");
-                    switchDarkModeCheck(false);
-                }
-                else {
-                    pageBody.classList.add("dark-mode-active")
-                    switchDarkModeCheck(true);
-                    localStorage.setItem("MobilekitDarkMode", "1");
-                }
-            })
-        })
-        //-----------------------------------------------------------------------
-
-
-        //-----------------------------------------------------------------------
-        // Countdown
-        function countdownTimer(time) {
-            var end = time;
-            end = new Date(end).getTime();
-            var d, h, m, s;
-            setInterval(() => {
-                let now = new Date().getTime();
-                let r = parseInt((end - now) / 1000);
-                if (r >= 0) {
-                    // days
-                    d = parseInt(r / 86400);
-                    r = (r % 86400);
-                    // hours
-                    h = parseInt(r / 3600);
-                    r = (r % 3600);
-                    // minutes
-                    m = parseInt(r / 60);
-                    r = (r % 60);
-                    // seconds
-                    s = parseInt(r);
-                    d = parseInt(d, 10);
-                    h = h < 10 ? "0" + h : h;
-                    m = m < 10 ? "0" + m : m;
-                    s = s < 10 ? "0" + s : s;
-                    document.getElementById("countDown").innerHTML =
-                        "<div>" + d + "<span>Days</span></div>"
-                        +
-                        "<div>" + h + "<span>Hours</span></div>"
-                        +
-                        "<div>" + m + "<span>Minutes</span></div>"
-                        +
-                        "<div>" + s + "<span>Seconds</span></div>"
-                } else {
-                    document.getElementById("countDown").innerHTML = "<p class='alert alert-outline-warning'>The countdown is over.</p>"
-                }
-            }, 1000);
         }
         //-----------------------------------------------------------------------
 
@@ -1030,9 +588,41 @@ const Home = () => {
             themeTesting();
         }
         //-----------------------------------------------------------------------
+        //-----------------------------------------------------------------------
         var pageBody = document.body;
+        var checkDarkModeStatus = localStorage.getItem("MobilekitDarkMode");
+        var switchDarkMode = document.querySelectorAll(".dark-mode-switch");
+        var pageBodyActive = pageBody.classList.contains("dark-mode-active");
 
-        // Other parts of your code...
+        function switchDarkModeCheck(value) {
+            switchDarkMode.forEach(function (el) {
+                el.checked = value;
+            }); 
+        }
+
+        // Check if enable as default
+        if (Mobilekit.Dark_Mode.default) {
+            pageBody.classList.add("dark-mode-active");
+        }
+
+        // Night Mode
+        if (Mobilekit.Dark_Mode.night_mode.enable) {
+            var nightStart = Mobilekit.Dark_Mode.night_mode.start_time;
+            var nightEnd = Mobilekit.Dark_Mode.night_mode.end_time;
+            var currentDate = new Date();
+            var currentHour = currentDate.getHours();
+            if (currentHour >= nightStart || currentHour < nightEnd) {
+                // It is night time
+                pageBody.classList.add("dark-mode-active");
+            }
+        }
+
+        // Auto Detect Dark Mode
+        if (Mobilekit.Dark_Mode.auto_detect.enable) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                pageBody.classList.add("dark-mode-active");
+            }
+        }
 
         // if dark mode on
         if (checkDarkModeStatus === "1" || pageBody.classList.contains('dark-mode-active')) {
@@ -1041,28 +631,53 @@ const Home = () => {
                 // dark mode already activated
             }
             else {
-                pageBody.classList.add("dark-mode-active")
+                pageBody.classList.add("dark-mode-active");
             }
         }
+
         else {
             switchDarkModeCheck(false);
         }
-        switchDarkMode.forEach(function (el) {
-            el.addEventListener("change", function () {
-                var darkmodeCheck = localStorage.getItem("MobilekitDarkMode");
-                var bodyCheck = pageBody.classList.contains('dark-mode-active');
-                if (darkmodeCheck === "1" || bodyCheck) {
-                    pageBody.classList.remove("dark-mode-active");
-                    localStorage.setItem("MobilekitDarkMode", "0");
-                    switchDarkModeCheck(false);
-                }
-                else {
-                    pageBody.classList.add("dark-mode-active")
-                    switchDarkModeCheck(true);
-                    localStorage.setItem("MobilekitDarkMode", "1");
-                }
-            })
-        })
+
+        const attachEventListeners = () => {
+            switchDarkMode = document.querySelectorAll(".dark-mode-switch");
+            switchDarkMode.forEach(function (el) {
+                el.addEventListener("click", function () {
+                    switchDarkMode.forEach(function (el) {
+                        el.addEventListener("click", function () {
+                            var darkmodeCheck = localStorage.getItem("MobilekitDarkMode");
+                            var bodyCheck = pageBody.classList.contains('dark-mode-active');
+                            if (darkmodeCheck === "1" || bodyCheck) {
+                                pageBody.classList.remove("dark-mode-active");
+                                localStorage.setItem("MobilekitDarkMode", "0");
+                                switchDarkModeCheck(false);
+                            } 
+                            else {
+                                pageBody.classList.add("dark-mode-active");
+                                switchDarkModeCheck(true);
+                                localStorage.setItem("MobilekitDarkMode", "1");
+                            }
+                        });
+                    })
+                });
+            });
+        }
+    
+        // Attach the event listeners immediately, in case the nodes already exist in the DOM
+        attachEventListeners();
+    
+        // Create a MutationObserver that calls attachEventListeners when nodes are added to the DOM
+        const observer = new MutationObserver(attachEventListeners);
+    
+        // Start observing the document with the configured parameters
+        observer.observe(document, { childList: true, subtree: true });
+    
+        // Clean up the observer when the component is unmounted
+        return () => observer.disconnect();
+        //-----------------------------------------------------------------------
+
+
+
     }, []);
 
     return (
